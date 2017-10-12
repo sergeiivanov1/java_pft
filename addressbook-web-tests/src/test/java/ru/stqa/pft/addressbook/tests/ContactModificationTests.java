@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase{
                     "111122","223323","33333333","gwggwr@ewfw.ru","wefw@mail.ru","rffw","efwef","test1"));
             app.getNavigationHelper().gotoHomePage();
         }
-        app.getContactHelper().initContactModification();
+        app.getContactHelper().initContactModification(before - 1);
         app.getContactHelper().fillContactForm( new ContactData("name2","middlename2","wefw",
                 "111122","223323","33333333","gwggwr@ewfw.ru","wefw@mail.ru","rffw","efwef",null), false);
         app.getContactHelper().submitContactModification();

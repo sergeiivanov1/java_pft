@@ -20,7 +20,7 @@ public class ContactDeletionTests extends TestBase{
                     "111122","223323","33333333","gwggwr@ewfw.ru","wefw@mail.ru","rffw","efwef","test1"));
             app.getNavigationHelper().gotoHomePage();
         }
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(before - 1);
         app.getContactHelper().deleteSelectedContacts();
         app.getContactHelper().confirmationContactDeletion();
         int after = app.getContactHelper().getContactCount();
