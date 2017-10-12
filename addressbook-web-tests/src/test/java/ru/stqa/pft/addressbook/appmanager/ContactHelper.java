@@ -47,7 +47,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContacts() {
-        click(By.name("//form[@id='LoginForm']/input[3]"));
+        //click(By.name("//form[@id='LoginForm']/input[3]"));
+        click(By.xpath("//input[@value='Delete']"));
     }
 
     public void confirmationContactDeletion() {
@@ -60,6 +61,18 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactModification() {
         click(By.name("update"));
+    }
+
+    public void createContact(ContactData contact) {
+        fillContactForm(
+                new ContactData("name2","middlename2","wefw",
+                        "111122","223323","33333333","gwggwr@ewfw.ru","wefw@mail.ru","rffw","efwef","test1"),true);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
 
