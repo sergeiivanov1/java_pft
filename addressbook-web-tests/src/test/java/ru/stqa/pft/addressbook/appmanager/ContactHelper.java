@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,11 +53,13 @@ public class ContactHelper extends HelperBase {
 
     public void deleteSelectedContacts() {
         //click(By.name("//form[@id='LoginForm']/input[3]"));
-        click(By.xpath("//input[@value='Delete']"));
+        //click(By.xpath("//input[@value='Delete']"));
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
     public void confirmationContactDeletion() {
-        click(By.name("//div[@id='content']/form[2]/div[2]/input"));
+        Alert alert = wd.switchTo().alert();
+        alert.accept();
     }
 
     public void initContactModification(int index) {
@@ -68,12 +71,25 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void createContact(ContactData contact) {
+    public void create(ContactData contact) {
         fillContactForm(
                 new ContactData("name2","middlename2","wefw",
                         "111122","223323","33333333","gwggwr@ewfw.ru","wefw@mail.ru","rffw","efwef","test1"),true);
         submitContactCreation();
         returnToHomePage();
+    }
+
+    public void modify(int index, ContactData contact) {
+        initContactModification(index);
+        fillContactForm( contact, false);
+        submitContactModification();
+        returnToHomePage();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContacts();
+        confirmationContactDeletion();
     }
 
     public boolean isThereAContact() {
@@ -84,12 +100,13 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List <ContactData> contacts = new ArrayList<ContactData>();
-        List <WebElement> elements = wd.findElements(By.cssSelector("table > tr"));
+        List <WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String name = element.getText();
-            ContactData contact = new ContactData(name,null,null,null,null,null,null,null,null,null,null);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(id, name,null,null,null,null,null,null,null,null,null,null);
             contacts.add(contact);
         }
         return contacts;

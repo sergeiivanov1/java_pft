@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
+    private int id;
     private final String name;
     private final String middleName;
     private final String lastName;
@@ -14,6 +15,7 @@ public class ContactData {
     private String group;
 
     public ContactData(String name, String middleName, String lastName, String homeTelephone, String mobileTelephone, String workTelephone, String email, String email2, String email3, String address, String group) {
+        this.id = Integer.MAX_VALUE;
         this.name = name;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -25,6 +27,29 @@ public class ContactData {
         this.email3 = email3;
         this.address = address;
         this.group = group;
+    }
+
+    public ContactData(int id, String name, String middleName, String lastName, String homeTelephone, String mobileTelephone, String workTelephone, String email, String email2, String email3, String address, String group) {
+        this.id = id;
+        this.name = name;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.homeTelephone = homeTelephone;
+        this.mobileTelephone = mobileTelephone;
+        this.workTelephone = workTelephone;
+        this.email = email;
+        this.email2 = email2;
+        this.email3 = email3;
+        this.address = address;
+        this.group = group;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -69,5 +94,33 @@ public class ContactData {
 
     public String getGroup() {
         return group;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "name='" + name + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", homeTelephone='" + homeTelephone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", group='" + group + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        return name != null ? name.equals(that.name) : that.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
     }
 }
