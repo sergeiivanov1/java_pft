@@ -5,6 +5,11 @@ package ru.stqa.pft.sandbox;
  */
 public class SquareTests {
 
+    public  static void main(String args[]) {
+        PriceComporator pr = new PriceComporator();
+        System.out.println(pr);
+    }
+
     public void testArea() {
 
     }

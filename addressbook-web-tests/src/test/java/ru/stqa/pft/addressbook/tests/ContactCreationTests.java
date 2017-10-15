@@ -9,6 +9,9 @@ import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactCreationTests extends TestBase {
 
     @Test
@@ -20,7 +23,7 @@ public class ContactCreationTests extends TestBase {
         app.contact().create(contact);
         Contacts after = app.contact().all();
         //Assert.assertEquals(after.size(),before.size() + 1);
-        MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c1) -> c1.getId()).max().getAsInt()))));
+        assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c1) -> c1.getId()).max().getAsInt()))));
     }
 
 }
